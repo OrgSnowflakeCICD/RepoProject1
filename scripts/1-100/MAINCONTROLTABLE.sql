@@ -1,4 +1,5 @@
--- USE DATABASE SANDBOX; -- Remove this line in real CICD
+EXECUTE IMMEDIATE
+$$
 DECLARE
     UPDATECOUNT INT;
     INSERTCOUNT INT;
@@ -251,3 +252,4 @@ BEGIN
     SELECT "number of rows inserted", "number of rows updated" INTO INSERTCOUNT, UPDATECOUNT FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()));
     RETURN 'number of rows inserted: ' || INSERTCOUNT || ', number of rows updated: ' || UPDATECOUNT;
 END;
+$$;
