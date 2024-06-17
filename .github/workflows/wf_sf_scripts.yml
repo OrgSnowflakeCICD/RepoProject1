@@ -32,8 +32,8 @@ jobs:
           SNOWSQL_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           TARGET_TASKID_RANGE: ${{ vars.TARGET_TASKID_RANGE }}
         run: |
-          ~/bin/snowsql -q $GITHUB_WORKSPACE/scripts/DDL_MainControlTable.sql
-          ~/bin/snowsql -q $GITHUB_WORKSPACE/scripts/DDL_ConnectionControlTable.sql
+          ~/bin/snowsql -f $GITHUB_WORKSPACE/scripts/DDL_MainControlTable.sql
+          ~/bin/snowsql -f $GITHUB_WORKSPACE/scripts/DDL_ConnectionControlTable.sql
           if [[ -n $TARGET_TASKID_RANGE ]]; then
               # If this job runs at the project repo
               # Only run the target taskid range subdirectory and skip the other subdirectories
