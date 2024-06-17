@@ -46,7 +46,7 @@ jobs:
 
                   sql_query=$(cat "$GITHUB_WORKSPACE/$relative_path")
                   
-                  ~/bin/snowsql -q "EXECUTE IMMEDIATE '$sql_query'"  
+                  ~/bin/snowsql -q "EXECUTE IMMEDIATE $$ $sql_query $$"  
 
 
           
