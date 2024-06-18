@@ -48,7 +48,9 @@ jobs:
               # Loop through all subdirectories for all taskid ranges
               for sql_file in $(find "$GITHUB_WORKSPACE/scripts" -name '*.sql'); do
                   relative_path="${sql_file#$GITHUB_WORKSPACE/}"
-                  echo "Processing sql file: $relative_path"
-                  ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"
+                  if [ "$relative_path" != "scripts/DDL_ConnectionControlTable.sql" ] && [ "$relative_path" != "DDL_MainControlTable.sql" ]; then
+                      echo "Processing sql file: $relative_path"
+                      ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"
+                  fi
               done
           fi
