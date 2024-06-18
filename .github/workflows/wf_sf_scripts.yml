@@ -41,15 +41,7 @@ jobs:
               for sql_file in $(find "$GITHUB_WORKSPACE/scripts/$TARGET_TASKID_RANGE" -name '*.sql'); do
                   relative_path="${sql_file#$GITHUB_WORKSPACE/}"
                   echo "Processing sql file: $relative_path"
-                  ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"
-
-
-                  # sql_query=$(cat "$GITHUB_WORKSPACE/$relative_path")
-                  
-                  # ~/bin/snowsql -q "EXECUTE IMMEDIATE $$ $sql_query $$"  
-
-
-          
+                  ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"         
               done
           else
               # If this job runs at the ED repo
