@@ -56,9 +56,9 @@ BEGIN
                 ,UPDATEDATETIMEUTC
     		   )
          VALUES
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimWell''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -71,9 +71,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimWellActivity''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -86,9 +86,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimWellActivityDaily''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -101,9 +101,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimRigActivity''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -116,9 +116,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimWellCoring''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -131,9 +131,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimWellBore''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -146,9 +146,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''DimWellBoreGeoformation''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,20
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -161,9 +161,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''FactWellActivityProblem''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,80
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
@@ -176,9 +176,9 @@ BEGIN
                ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       (''DWDM''
+    	       (''DWDM2''
                ,''FactWellCoreActivity''
-               ,''TR_DWDM_Daily''
+               ,''TR_DWDM2_Daily''
                ,80
                ,''1900-01-01 00:00:00''
                ,''2999-12-31 00:00:00''
