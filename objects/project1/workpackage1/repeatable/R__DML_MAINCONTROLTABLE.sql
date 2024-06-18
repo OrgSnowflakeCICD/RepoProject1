@@ -1,33 +1,34 @@
--- USE DATABASE SANDBOX; -- Remove this line in real CICD
+EXECUTE IMMEDIATE
+$$
 DECLARE
     UPDATECOUNT INT;
     INSERTCOUNT INT;
 BEGIN
-    -- EDPRD environment
+    -- ED PRD environment
     IF (CURRENT_DATABASE() = 'DB_ED_PRD') THEN
         SET SUBSCRIPTIONID = '87da0fea-d9ac-4549-b024-d98acf6649b5';
         SET RESOURCEGROUP = 'edpdevarmrgp004';
         SET ERRORNOTIFICATIONEMAILS = 'dummy@suncor.com';
-    -- EDQUT environment
+    -- ED QUT environment
     ELSEIF (CURRENT_DATABASE() = 'DB_ED_QUT') THEN
         SET SUBSCRIPTIONID = '87da0fea-d9ac-4549-b024-d98acf6649b5';
         SET RESOURCEGROUP = 'edpdevarmrgp004';
         SET ERRORNOTIFICATIONEMAILS = 'dummy@suncor.com';
-    -- EDDEV environment
+    -- ED DEV environment
     ELSEIF (CURRENT_DATABASE() = 'DB_ED_DEV') THEN
         SET SUBSCRIPTIONID = '87da0fea-d9ac-4549-b024-d98acf6649b5';
         SET RESOURCEGROUP = 'edpdevarmrgp004';
         SET ERRORNOTIFICATIONEMAILS = 'dummy@suncor.com';
-    -- PQA environment
+    -- PROJECT QUT environment
     ELSEIF (CURRENT_DATABASE() = 'DB_PROJECT1_QUT') THEN
         SET SUBSCRIPTIONID = '87da0fea-d9ac-4549-b024-d98acf6649b5';
         SET RESOURCEGROUP = 'edpdevarmrgp004';
         SET ERRORNOTIFICATIONEMAILS = 'dummy@suncor.com';
-    -- PDEV environment
+    -- PROJECT DEV environment
     ELSEIF (CURRENT_DATABASE() = 'DB_PROJECT1_DEV') THEN
         SET SUBSCRIPTIONID = '87da0fea-d9ac-4549-b024-d98acf6649b4';
         SET RESOURCEGROUP = 'edpdevarmrgp003';
-        SET ERRORNOTIFICATIONEMAILS = 'davsun2@suncor.com';
+        SET ERRORNOTIFICATIONEMAILS = 'davsun@suncor.com';
     ELSE
         RETURN 'Error: Unknown Database!';
     END IF;
@@ -36,7 +37,8 @@ BEGIN
 
     CREATE OR REPLACE TEMPORARY TABLE ORCHESTRATION.MAINCONTROLTABLETMP LIKE ORCHESTRATION.MAINCONTROLTABLE;
     
-    EXECUTE IMMEDIATE $$
+    EXECUTE IMMEDIATE 
+	'
         INSERT INTO ORCHESTRATION.MAINCONTROLTABLETMP
                (PROJECT
                 ,GOLDTABLE
@@ -54,142 +56,142 @@ BEGIN
                 ,UPDATEDATETIMEUTC
     		   )
          VALUES
-    	       ('DWDM'
-               ,'DimWell'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimWell''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMWELL_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMWELL_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'DimWellActivity'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimWellActivity''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMWELLACTIVITY_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMWELLACTIVITY_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'DimWellActivityDaily'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimWellActivityDaily''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMWELLACTIVITYDAILY_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMWELLACTIVITYDAILY_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'DimRigActivity'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimRigActivity''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
                ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMRIGACTIVITY_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMRIGACTIVITY_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'DimWellCoring'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimWellCoring''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMWELLCORING_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMWELLCORING_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'DimWellBore'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimWellBore''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMWELLLBORE_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMWELLLBORE_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'DimWellBoreGeoformation'
-               ,'TR_DWDM_Daily'
-               ,100
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''DimWellBoreGeoformation''
+               ,''TR_DWDM_Daily''
+               ,20
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
                ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_DIMWELLBOREGEOFORMATION_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_DIMWELLBOREGEOFORMATION_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'FactWellActivityProblem'
-               ,'TR_DWDM_Daily'
-               ,300
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM''
+               ,''FactWellActivityProblem''
+               ,''TR_DWDM_Daily''
+               ,80
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_FACTWELLACTIVITYPROBLEM_LOAD(ProcessStartDateTime=>ProcessStartDateTimePlaceholder,ProcessEndDateTime=>ProcessEndDateTimePlaceholder);'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_FACTWELLACTIVITYPROBLEM_LOAD(ProcessStartDateTime=>ProcessStartDateTimePlaceholder,ProcessEndDateTime=>ProcessEndDateTimePlaceholder);''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   ),
-    	       ('DWDM'
-               ,'FactWellCoreActivity'
-               ,'TR_DWDM_Daily'
-               ,300
-               ,'1900-01-01 00:00:00'
-               ,'2999-12-31 00:00:00'
+    	       (''DWDM3''
+               ,''FactWellCoreActivity''
+               ,''TR_DWDM_Daily''
+               ,80
+               ,''1900-01-01 00:00:00''
+               ,''2999-12-31 00:00:00''
     		   ,1
     		   ,$ERRORNOTIFICATIONEMAILS
     		   ,$SUBSCRIPTIONID
     		   ,$RESOURCEGROUP
-               ,'ls_snowflake_gold_layer'
-    		   ,'CALL EDW.SP_FACTWELLCOREACTIVITY_LOAD();'
-               ,''
+               ,''ls_snowflake_gold_layer''
+    		   ,''CALL EDW.SP_FACTWELLCOREACTIVITY_LOAD();''
+               ,''''
                ,$UPDATEDATETIMEUTC
     		   )
-        $$;
+        ';
         MERGE INTO ORCHESTRATION.MAINCONTROLTABLE target
             USING ORCHESTRATION.MAINCONTROLTABLETMP source 
             ON target.PROJECT = source.PROJECT AND target.GOLDTABLE = source.GOLDTABLE
@@ -251,3 +253,4 @@ BEGIN
     SELECT "number of rows inserted", "number of rows updated" INTO INSERTCOUNT, UPDATECOUNT FROM TABLE(RESULT_SCAN(LAST_QUERY_ID()));
     RETURN 'number of rows inserted: ' || INSERTCOUNT || ', number of rows updated: ' || UPDATECOUNT;
 END;
+$$
