@@ -32,8 +32,8 @@ jobs:
           SNOWSQL_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           TARGET_TASKID_RANGE: ${{ vars.TARGET_TASKID_RANGE }}
         run: |
-          ~/bin/snowsql -q $GITHUB_WORKSPACE/scripts/DDL_MainControlTable.sql
-          ~/bin/snowsql -q $GITHUB_WORKSPACE/scripts/DDL_ConnectionControlTable.sql
+          ~/bin/snowsql -f $GITHUB_WORKSPACE/scripts/DDL_MainControlTable.sql
+          ~/bin/snowsql -f $GITHUB_WORKSPACE/scripts/DDL_ConnectionControlTable.sql
           if [[ -n $TARGET_TASKID_RANGE ]]; then
               # If this job runs at the project repo
               # Only run the target taskid range subdirectory and skip the other subdirectories
@@ -41,14 +41,16 @@ jobs:
               for sql_file in $(find "$GITHUB_WORKSPACE/scripts/$TARGET_TASKID_RANGE" -name '*.sql'); do
                   relative_path="${sql_file#$GITHUB_WORKSPACE/}"
                   echo "Processing sql file: $relative_path"
-                  ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"
+                  ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"         
               done
           else
               # If this job runs at the ED repo
               # Loop through all subdirectories for all taskid ranges
               for sql_file in $(find "$GITHUB_WORKSPACE/scripts" -name '*.sql'); do
                   relative_path="${sql_file#$GITHUB_WORKSPACE/}"
-                  echo "Processing sql file: $relative_path"
-                  ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"
+                  if [ "$relative_path" != "scripts/DDL_ConnectionControlTable.sql" ] && [ "$relative_path" != "DDL_MainControlTable.sql" ]; then
+                      echo "Processing sql file: $relative_path"
+                      ~/bin/snowsql -f "$GITHUB_WORKSPACE/$relative_path"
+                  fi
               done
           fi
