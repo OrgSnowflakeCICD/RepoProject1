@@ -11,31 +11,31 @@ BEGIN
 
     -- ED PRD environment
     IF (CURRENT_DATABASE() = 'DB_ED_PRD') THEN
-        SET SNOWFLAKEWAREHOUSE = 'dummy_wh';
+        SET SNOWFLAKEWAREHOUSE = 'dummy_wh2';
         SET SNOWFLAKEUSER = 'dummy_user';
         SET SNOWFLAKEPASSWORDSECRET = 'dummy_secret';
         SET SNOWFLAKEROLE = 'dummy_role';
     -- ED QUT environment
     ELSEIF (CURRENT_DATABASE() = 'DB_ED_QUT') THEN
-        SET SNOWFLAKEWAREHOUSE = 'dummy_wh';
+        SET SNOWFLAKEWAREHOUSE = 'dummy_wh2';
         SET SNOWFLAKEUSER = 'dummy_user';
         SET SNOWFLAKEPASSWORDSECRET = 'dummy_secret';
         SET SNOWFLAKEROLE = 'dummy_role';
     -- ED DEV environment
     ELSEIF (CURRENT_DATABASE() = 'DB_ED_DEV') THEN
-        SET SNOWFLAKEWAREHOUSE = 'dummy_wh';
+        SET SNOWFLAKEWAREHOUSE = 'dummy_wh2';
         SET SNOWFLAKEUSER = 'dummy_user';
         SET SNOWFLAKEPASSWORDSECRET = 'dummy_secret';
         SET SNOWFLAKEROLE = 'dummy_role';
     -- PROJECT QUT environment
     ELSEIF (CURRENT_DATABASE() = 'DB_PROJECT1_QUT') THEN
-        SET SNOWFLAKEWAREHOUSE = 'dummy_wh';
+        SET SNOWFLAKEWAREHOUSE = 'dummy_wh2';
         SET SNOWFLAKEUSER = 'dummy_user';
         SET SNOWFLAKEPASSWORDSECRET = 'dummy_secret';
         SET SNOWFLAKEROLE = 'dummy_role';
     -- PROJECT DEV environment
     ELSEIF (CURRENT_DATABASE() = 'DB_PROJECT1_DEV') THEN
-        SET SNOWFLAKEWAREHOUSE = 'demo_wh';
+        SET SNOWFLAKEWAREHOUSE = 'demo_wh2';
         SET SNOWFLAKEUSER = 'davsun';
         SET SNOWFLAKEPASSWORDSECRET = 'sf--password';
         SET SNOWFLAKEROLE = 'ACCOUNTADMIN';
