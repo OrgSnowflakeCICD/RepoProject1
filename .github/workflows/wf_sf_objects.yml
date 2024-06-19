@@ -40,7 +40,6 @@ jobs:
           echo "Execute conformed dims first!"
           mkdir ${{ github.workspace }}/objects/folder_tmp
           cp ${{ github.workspace }}/objects/*__CONFORMEDDIM_* ${{ github.workspace }}/objects/folder_tmp
-          
           ddl_project_change_history_query=$(cat "$GITHUB_WORKSPACE/objects/change_history/ddl_project_change_history.sql" | sed "s/{TARGET_STAR_SCHEMA}/CONFORMEDDIM/g")
           echo "$ddl_project_change_history_query"
           ~/bin/snowsql -q "$ddl_project_change_history_query"          
@@ -52,16 +51,26 @@ jobs:
           ~/bin/snowsql -q "$dml_change_history_query"
           rm -rf ${{ github.workspace }}/objects/folder_tmp          
 
-
-
-
-
           # if [[ -n $TARGET_STAR_SCHEMA ]]; then
           #   # if this job runs at project repo
           #   # only run the target project subdirectory and skip the other subdirectories
           #   echo "Target STAR SCHEMA is $TARGET_STAR_SCHEMA!"
+
+          #   mkdir ${{ github.workspace }}/objects/folder_tmp
+          #   cp ${{ github.workspace }}/objects/*__$TARGET_STAR_SCHEMA_* ${{ github.workspace }}/objects/folder_tmp
+          #   ddl_project_change_history_query=$(cat "$GITHUB_WORKSPACE/objects/change_history/ddl_project_change_history.sql" | sed "s/{TARGET_STAR_SCHEMA}/$TARGET_STAR_SCHEMA/g")
+          #   echo "$ddl_project_change_history_query"
+          #   ~/bin/snowsql -q "$ddl_project_change_history_query"
+
+          #   schemachange -f $GITHUB_WORKSPACE/objects/folder_tmp -a $SNOWSQL_ACCOUNT -u $SNOWSQL_USER -r $SNOWSQL_ROLE -w $SNOWSQL_WAREHOUSE -d $SNOWSQL_DATABASE -c $SNOWSQL_DATABASE.SCHEMACHANGE.CHANGE_HISTORY_$TARGET_STAR_SCHEMA
             
-          #   schemachange -f $GITHUB_WORKSPACE/objects/$TARGET_STAR_SCHEMA -a $SNOWSQL_ACCOUNT -u $SNOWSQL_USER -r $SNOWSQL_ROLE -w $SNOWSQL_WAREHOUSE -d $SNOWSQL_DATABASE -c $SNOWSQL_DATABASE.SCHEMACHANGE.CHANGE_HISTORY
+          #   # merge project change history into master change history table
+          #   # finally drop project change history table
+          #   dml_change_history_query=$(cat "$GITHUB_WORKSPACE/objects/change_history/dml_change_history.sql" | sed "s/{TARGET_STAR_SCHEMA}/$TARGET_STAR_SCHEMA/g")
+          #   echo "$dml_change_history_query"
+          #   ~/bin/snowsql -q "$dml_change_history_query"
+          #   rm -rf ${{ github.workspace }}/objects/folder_tmp          
+
           # else
           #   # if this job runs at ED repo
           #   # loop through all subdirectories for all projects
