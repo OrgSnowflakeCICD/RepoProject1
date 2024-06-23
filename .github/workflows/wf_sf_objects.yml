@@ -28,22 +28,22 @@ jobs:
             echo "Error: Repository is not 'RepoED, but we don't have repo variable TARGET_STAR_SCHEMA!"
             exit 1
           fi
-      # - name: Get Unique Identifiers
-      #   id: extract-unique-identifiers
-      #   run: |
-      #     if [[ -n $TARGET_STAR_SCHEMA ]]; then
-      #       unique_identifiers=("CONFORMEDDIM" "$TARGET_STAR_SCHEMA")
-      #     else
-      #       identifiers=()
-      #       # for file in $(find ${{ github.workspace }}/snowflake_objects -type f -name '*.sql'); do 
-      #       for file in ${{ github.workspace }}/snowflake_objects/*.sql; do
-      #         if [[ $file =~ ^.*_(.*)\.sql$ ]]; then
-      #           identifiers+=("${BASH_REMATCH[1]}")
-      #         fi
-      #       done
-      #       unique_identifiers=($(echo "${identifiers[@]}" | tr ' ' '\n' | sort -u ))
-      #     fi
-      #     echo "{unique_identifiers}=${unique_identifiers[@]}" >> $GITHUB_OUTPUT
+      - name: Get Unique Identifiers
+        id: extract-unique-identifiers
+        run: |
+          if [[ -n $TARGET_STAR_SCHEMA ]]; then
+            unique_identifiers=("CONFORMEDDIM" "$TARGET_STAR_SCHEMA")
+          else
+            identifiers=()
+            # for file in $(find ${{ github.workspace }}/snowflake_objects -type f -name '*.sql'); do 
+            for file in ${{ github.workspace }}/snowflake_objects/*.sql; do
+              if [[ $file =~ ^.*_(.*)\.sql$ ]]; then
+                identifiers+=("${BASH_REMATCH[1]}")
+              fi
+            done
+            unique_identifiers=($(echo "${identifiers[@]}" | tr ' ' '\n' | sort -u ))
+          fi
+          echo "unique_identifiers=${unique_identifiers[@]}" >> $GITHUB_OUTPUT
       - name: Deploy
         env:
           SNOWSQL_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
@@ -73,8 +73,8 @@ jobs:
             unique_identifiers=($(echo "${identifiers[@]}" | tr ' ' '\n' | sort -u))
           fi
           
-          for identifier in "${unique_identifiers[@]}"; do
-          # for identifier in "${steps.extract-unique-identifiers.outputs.unique_identifiers[@]}"; do
+          # for identifier in "${unique_identifiers[@]}"; do
+          for identifier in "${{ steps.extract-unique-identifiers.outputs.unique_identifiers }}"; do
             echo "Execute identifier $identifier!"
             mkdir ${{ github.workspace }}/snowflake_objects/folder_tmp
             cp ${{ github.workspace }}/snowflake_objects/*_$identifier.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
