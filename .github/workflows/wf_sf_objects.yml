@@ -75,7 +75,7 @@ jobs:
           # fi
           
           # for identifier in "${unique_identifiers[@]}"; do
-          unique_identifiers="${{ steps.extract-unique-identifiers.outputs.unique_identifiers }}"
+          unique_identifiers=("${{ steps.extract-unique-identifiers.outputs.unique_identifiers }}")
           for identifier in "${unique_identifiers[@]}"; do
             echo "Execute identifier $identifier!"
             mkdir ${{ github.workspace }}/snowflake_objects/folder_tmp
