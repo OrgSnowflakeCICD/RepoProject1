@@ -31,8 +31,8 @@ jobs:
       - name: Get Unique Identifiers
         id: extract-unique-identifiers
         run: |
-          if [[ -n $TARGET_STAR_SCHEMA ]]; then
-            unique_identifiers=("CONFORMEDDIM" "$TARGET_STAR_SCHEMA")
+          if [[ -n "${{ vars.TARGET_STAR_SCHEMA }}" ]]; then
+            unique_identifiers=("CONFORMEDDIM" "${{ vars.TARGET_STAR_SCHEMA }}")
           else
             identifiers=()
             # for file in $(find ${{ github.workspace }}/snowflake_objects -type f -name '*.sql'); do 
