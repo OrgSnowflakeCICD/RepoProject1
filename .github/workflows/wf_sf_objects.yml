@@ -22,12 +22,12 @@ jobs:
         run: |
           curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.3/linux_x86_64/snowsql-1.3.0-linux_x86_64.bash
           SNOWSQL_DEST=~/bin SNOWSQL_LOGIN_SHELL=~/.profile bash snowsql-1.3.0-linux_x86_64.bash
-      - name: Check Exist Target Star Schema
-        run: |
-          if [[ "${{ github.event.repository.name }}" != "RepoED" ]] && [[ -z "${{ vars.TARGET_STAR_SCHEMA }}" ]]; then
-            echo "Error: Repository is not 'RepoED, but we don't have repo variable TARGET_STAR_SCHEMA!"
-            exit 1
-          fi
+      # - name: Check Exist Target Star Schema
+      #   run: |
+      #     if [[ "${{ github.event.repository.name }}" != "RepoED" ]] && [[ -z "${{ vars.TARGET_STAR_SCHEMA }}" ]]; then
+      #       echo "Error: Repository is not 'RepoED, but we don't have repo variable TARGET_STAR_SCHEMA!"
+      #       exit 1
+      #     fi
       - name: Get Unique Identifiers
         id: extract-unique-identifiers
         run: |
