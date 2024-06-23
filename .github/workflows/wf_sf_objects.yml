@@ -40,7 +40,7 @@ jobs:
 
           echo "Execute conformed dims first!"
           mkdir ${{ github.workspace }}/snowflake_objects/folder_tmp
-          cp ${{ github.workspace }}/snowflake_objects/*__CONFORMEDDIM.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
+          cp ${{ github.workspace }}/snowflake_objects/*_CONFORMEDDIM.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
           ddl_project_change_history_query=$(cat "$GITHUB_WORKSPACE/snowflake_objects/change_history/ddl_project_change_history.sql" | sed "s/{TARGET_STAR_SCHEMA}/CONFORMEDDIM/g")
           echo "$ddl_project_change_history_query"
           ~/bin/snowsql -q "$ddl_project_change_history_query"          
@@ -54,7 +54,7 @@ jobs:
 
           echo "Execute target star schema then!"
           mkdir ${{ github.workspace }}/snowflake_objects/folder_tmp
-          cp ${{ github.workspace }}/snowflake_objects/*__$TARGET_STAR_SCHEMA.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
+          cp ${{ github.workspace }}/snowflake_objects/*_$TARGET_STAR_SCHEMA.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
           ddl_project_change_history_query=$(cat "$GITHUB_WORKSPACE/snowflake_objects/change_history/ddl_project_change_history.sql" | sed "s/{TARGET_STAR_SCHEMA}/$TARGET_STAR_SCHEMA/g")
           echo "$ddl_project_change_history_query"
           ~/bin/snowsql -q "$ddl_project_change_history_query"          
