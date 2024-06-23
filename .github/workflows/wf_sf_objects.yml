@@ -43,7 +43,7 @@ jobs:
             done
             unique_identifiers=($(echo "${identifiers[@]}" | tr ' ' '\n' | sort -u))
           fi
-          echo "::set-output name=identifiers::${identifiers[*]}"
+          echo "{identifiers}={identifiers[*]}" >> $GITHUB_OUTPUT
       - name: Deploy
         env:
           SNOWSQL_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
