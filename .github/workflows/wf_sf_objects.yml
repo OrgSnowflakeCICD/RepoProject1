@@ -40,7 +40,8 @@ jobs:
 
 
           identifiers=()
-          for file in $(find ${{ github.workspace }}/snowflake_objects -type f -name '*.sql'); do
+          # for file in $(find ${{ github.workspace }}/snowflake_objects -type f -name '*.sql'); do 
+          for file in ${{ github.workspace }}/snowflake_objects/*.sql; do
             if [[ $file =~ ^.*_(.*)\.sql$ ]]; then
               identifiers+=("${BASH_REMATCH[1]}")
             fi
