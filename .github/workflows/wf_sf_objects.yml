@@ -61,7 +61,8 @@ jobs:
           pip install schemachange==3.6.1
           unique_identifiers=("${{ steps.extract-unique-identifiers.outputs.unique_identifiers }}")
           # for identifier in $(echo "${unique_identifiers[@]}" | tr ' ' '\n' | sort -u); do
-          for identifier in $(echo "${unique_identifiers[@]}"); do
+          # for identifier in $(echo "${unique_identifiers[@]}"); do
+          for identifier in "${unique_identifiers[@]}"; do
             echo "Execute identifier $identifier!"
             mkdir ${{ github.workspace }}/snowflake_objects/folder_tmp
             cp ${{ github.workspace }}/snowflake_objects/*_$identifier.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
