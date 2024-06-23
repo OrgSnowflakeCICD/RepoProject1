@@ -41,7 +41,7 @@ jobs:
                 identifiers+=("${BASH_REMATCH[1]}")
               fi
             done
-            unique_identifiers=($(echo "${identifiers[@]}" | tr ' ' '\n' | sort -u | tr '\n' ' '))
+            unique_identifiers=($(echo "${identifiers[@]}" | tr ' ' '\n' | sort -u ))
           fi
           echo "{unique_identifiers}=${unique_identifiers[@]}" >> $GITHUB_OUTPUT
       - name: Deploy
