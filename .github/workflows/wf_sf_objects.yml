@@ -53,6 +53,7 @@ jobs:
           SNOWSQL_PWD: ${{ secrets.SNOWFLAKE_PASSWORD }}
           SNOWSQL_ROLE: ${{ secrets.SNOWFLAKE_ROLE }}
           TARGET_STAR_SCHEMA: ${{ vars.TARGET_STAR_SCHEMA }}
+          UNIQUE_IDENTIFIERS: ${{ steps.extract-unique-identifiers.outputs.unique_identifiers }}
         run: |
           # create master change history table if not exists
           ddl_master_change_history_query=$(cat "$GITHUB_WORKSPACE/snowflake_objects/change_history/ddl_master_change_history.sql" | sed "s/{TARGET_STAR_SCHEMA}/$TARGET_STAR_SCHEMA/g")
@@ -74,7 +75,7 @@ jobs:
           # fi
           
           # for identifier in "${unique_identifiers[@]}"; do
-          for identifier in "${{{ steps.extract-unique-identifiers.outputs.unique_identifiers }}[@]}"; do
+          for identifier in "${UNIQUE_IDENTIFIERS[@]}"; do
             echo "Execute identifier $identifier!"
             mkdir ${{ github.workspace }}/snowflake_objects/folder_tmp
             cp ${{ github.workspace }}/snowflake_objects/*_$identifier.sql ${{ github.workspace }}/snowflake_objects/folder_tmp
