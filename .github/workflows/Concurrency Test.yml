@@ -1,6 +1,6 @@
 name: Concurrency Test
 # Concurrency can be used at workflow level or job leve
-concurrency: 2
+concurrency: "2"
 
 on:
   # Allows you to run this workflow manually from the Actions tab
