@@ -1,0 +1,22 @@
+name: Concurrency Test
+# Concurrency can be used at workflow level or job leve
+concurrency: "2"
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+   build-and-test-on-pr:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      
+# Adding sleep time to keep one running and trigger 2nd to check concurrency
+      - name: Build and code sim
+        run: |
+          echo "Starting the code build"
+          sleep 1m
+          echo "Finish the code build"
