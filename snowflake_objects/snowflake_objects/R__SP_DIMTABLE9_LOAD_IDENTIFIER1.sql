@@ -5,5 +5,6 @@ AS
 $$
 BEGIN
   RETURN message;
+
 END;
 $$;
